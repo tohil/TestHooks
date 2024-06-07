@@ -20,7 +20,7 @@ async function run() {
     });
 
     for (const pr of openPRs) {
-      if (pr.head.ref.startsWith("feature/")) {
+      if (pr.head.ref.startsWith("EEE-")) {
         // Check if this PR has a corresponding PR to main that is merged
         const { data: relatedPRs } = await octokit.pulls.list({
           owner,
