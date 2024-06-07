@@ -2,7 +2,7 @@ const { Octokit } = require("@octokit/rest");
 const github = require("@actions/github");
 
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
+  auth: process.env.MY_CUSTOM_TOKEN,
 });
 
 const context = github.context;
