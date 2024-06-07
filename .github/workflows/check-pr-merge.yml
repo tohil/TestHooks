@@ -26,7 +26,7 @@ jobs:
       id: check_pr
       run: node .github/scripts/check-pr-merge.js
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_TOKEN }}
 
     - name: Fail if check did not pass
       if: steps.check_pr.outputs.result != 'success'
