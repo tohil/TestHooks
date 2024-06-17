@@ -5,6 +5,7 @@ on:
     branches:
       - dev
     types: [opened, reopened, synchronize]
+  workflow_dispatch:  # Allows manual workflow dispatch
 
 jobs:
   check-merge:
