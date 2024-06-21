@@ -2,7 +2,7 @@ import { Octokit } from "@octokit/rest";
 import * as github from "@actions/github";
 
 const octokit = new Octokit({
-  auth: process.env.MY_CUSTOM_TOKEN,
+  auth: process.env.MY_CUSTOM_TOKEN_2,
 });
 
 const context = github.context;
