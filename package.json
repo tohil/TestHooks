@@ -1,0 +1,19 @@
+{
+  "name": "TestHooks",
+  "version": "1.0.0",
+  "description": "Testing workflow of blocking PR",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@octokit/rest": "^18.0.0",
+    "@actions/github": "^5.0.0"
+  },
+  "devDependencies": {},
+  "author": "Artem Zhuravlov",
+  "license": "ISC",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
