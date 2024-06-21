@@ -1,0 +1,38 @@
+name: Check PR Merge
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types: [opened, reopened, synchronize]
+  workflow_dispatch:  # Allows manual workflow dispatch
+
+jobs:
+  check-merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Check Node.js version
+        run: node -v
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check if PR to dev is merged into main
+        id: check_pr
+        run: node .github/scripts/check-pr-merge.mjs
+        env:
+          MY_CUSTOM_TOKEN_2: ${{ secrets.MY_CUSTOM_TOKEN_2 }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY_NAME: ${{ github.repository }}
+      - name: Fail if check did not pass
+        if: steps.check_pr.outcome != 'success'
+        run: exit 1
