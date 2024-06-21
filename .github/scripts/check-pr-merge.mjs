@@ -1,5 +1,5 @@
-const { Octokit } = require("@octokit/rest");
-const github = require("@actions/github");
+import { Octokit } from "@octokit/rest";
+import * as github from "@actions/github";
 
 const octokit = new Octokit({
   auth: process.env.MY_CUSTOM_TOKEN,
@@ -20,12 +20,12 @@ async function run() {
     });
 
     for (const pr of openPRs) {
-      if (pr.head.ref.startsWith("feature/*")) {
+      if (pr.head.ref.startsWith("feature/")) {
         // Check if this PR has a corresponding PR to main that is merged
         const { data: relatedPRs } = await octokit.pulls.list({
           owner,
           repo,
-          head: pr.head.ref,
+          head: `${owner}:${pr.head.ref}`,
           base: "main",
           state: "closed",
         });
@@ -50,4 +50,3 @@ async function run() {
 }
 
 run();
-
