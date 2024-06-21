@@ -12,23 +12,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '14'
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-    - name: Install dependencies
-      run: npm install @octokit/rest
+      - name: Check Node.js version
+        run: node -v
 
-    - name: Check if PR to dev has been merged into main
-      id: check_pr
-      run: node .github/scripts/check-pr-merge.js
-      env:
-        GITHUB_TOKEN: ${{ secrets.MY_CUSTOM_TOKEN }}
+      - name: Install dependencies
+        run: npm install
 
-    - name: Fail if check did not pass
-      if: steps.check_pr.outputs.result != 'success'
-      run: exit 1
+      - name: Check if PR to dev is merged into main
+        id: check_pr
+        run: node .github/scripts/check-pr-merge.mjs
+        env:
+          MY_CUSTOM_TOKEN: ${{ secrets.MY_CUSTOM_TOKEN }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+          GITHUB_REPOSITORY_NAME: ${{ github.repository }}
+      - name: Fail if check did not pass
+        if: steps.check_pr.outcome != 'success'
+        run: exit 1
