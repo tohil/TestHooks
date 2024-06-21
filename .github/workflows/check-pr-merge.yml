@@ -30,7 +30,7 @@ jobs:
         id: check_pr
         run: node .github/scripts/check-pr-merge.mjs
         env:
-          MY_CUSTOM_TOKEN: ${{ secrets.MY_CUSTOM_TOKEN }}
+          MY_CUSTOM_TOKEN_2: ${{ secrets.MY_CUSTOM_TOKEN_2 }}
           GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
           GITHUB_REPOSITORY_NAME: ${{ github.repository }}
       - name: Fail if check did not pass
